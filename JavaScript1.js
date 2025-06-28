@@ -1,35 +1,21 @@
 ﻿
 setupOptions();
 
-function makeTag(tagName, tagText, tagContainer, tagClass) {
-    let newTag = document.createElement(tagName);
-    newTag.innerText = tagText;
-    newTag.classList.add(tagClass);
-    tagContainer.appendChild(newTag);
-}
-
 // set up the select option tags
 function setupOptions() {
     let options = document.getElementById("options");
     for (let i = 0; i < radioNames.length; i++) {
-        let span = document.createElement("span");
-        span.innerText = radioNames[i];
-        span.classList.add("feedback-area");
-        options.appendChild(span);
-        let selectTag = document.createElement("select");
-        selectTag.id = radioNames[i];
-        options.appendChild(selectTag);
-        if ((i+1) % 3 === 0) {
-            options.appendChild(document.createElement('hr'));
+        makeTag("span", radioNames[i], options, "feedback-area");
+        makeTag("select", "", options, "nullClass").id = radioNames[i];
+        if ((i + 1) % 3 === 0) {
+            makeTag("hr", "", options, "nullClass");
         }
     }
 
     const selects = document.getElementsByTagName("select");
     for (const select of selects) {
         for (const state of states) {
-            const option = document.createElement("option");
-            option.innerText = state;
-            select.appendChild(option);
+            makeTag("option", state, select, "nullClass");
         }
     }
 }
@@ -66,12 +52,11 @@ function restForm() {
     setValue('learner', '').focus();
     setValue('comments', '');
 
-    const selects = document.querySelectorAll('select');
-    selects.forEach(select => {
-        select.value = select.options[0].value;
+    document.querySelectorAll('select').forEach(item => {
+        item.selectedIndex = 0;
     });
 }
-
+//-------------------------------- Utils ---------------
 function getValue(optionID) {
     const op = document.getElementById(optionID);
     return op.value;
@@ -81,3 +66,11 @@ function setValue(optionID, txt) {
     x.value = txt;
     return x;
 }
+function makeTag(tagName, tagText, tagContainer, tagClass) {
+    let newTag = document.createElement(tagName);
+    newTag.innerText = tagText;
+    newTag.classList.add(tagClass);
+    tagContainer.appendChild(newTag);
+    return newTag;
+}
+

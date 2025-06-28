@@ -1,5 +1,41 @@
 ﻿
+let data = getCourseData();
 setupOptions();
+
+function savedClick() {
+    const learnerName = getValue('learner');
+    const fname = learnerName.charAt(0).toUpperCase() + learnerName.slice(1);
+
+    let comments = getValue('comments').replace(/<name>/g, fname);
+
+    let learner = {
+        'name': learnerName,
+        'comments': comments
+    };
+    for (const attr of radioNames) {
+        learner[attr] = getValue(attr);
+    }
+    data.push(learner);
+    setCourseData();
+    restForm();
+}
+
+function generateReports() {
+    let report = "Generate a report using the criteria below for each student." +
+        "Insert te following at the begining of each student tutor report:\n" +
+        "w/c " + getValue("start_date") + " - " +
+        getValue("course_title") + "\n";
+    console.log(report + JSON.stringify(data));
+}
+
+function restForm() {
+    setValue('learner', '').focus();
+    setValue('comments', '');
+
+    document.querySelectorAll('select').forEach(item => {
+        item.selectedIndex = 0;
+    });
+}
 
 // set up the select option tags
 function setupOptions() {
@@ -20,42 +56,6 @@ function setupOptions() {
     }
 }
 
-let data = [];
-function savedClick() {
-    const learnerName = getValue('learner');
-    const fname = learnerName.charAt(0).toUpperCase() + learnerName.slice(1);
-
-    let comments = getValue('comments');
-
-    comments = comments.replace(/<name>/g, fname);
-
-    let learner = {
-        'name': learnerName,
-        'comments': comments
-    };
-    for (const attr of radioNames) {
-        learner[attr] = getValue(attr);
-    }
-    data.push(learner);
-    restForm();
-}
-
-function generateReports() {
-    let report = "Generate a report using the criteria below for each student." +
-        "Insert te following at the begining of each student tutor report:\n" +
-        "w/c " + getValue("start_date") + " - "  +
-        getValue("course_title") + "\n";
-    console.log(report + JSON.stringify(data));
-}
-
-function restForm() {
-    setValue('learner', '').focus();
-    setValue('comments', '');
-
-    document.querySelectorAll('select').forEach(item => {
-        item.selectedIndex = 0;
-    });
-}
 //-------------------------------- Utils ---------------
 function getValue(optionID) {
     const op = document.getElementById(optionID);
@@ -72,5 +72,23 @@ function makeTag(tagName, tagText, tagContainer, tagClass) {
     newTag.classList.add(tagClass);
     tagContainer.appendChild(newTag);
     return newTag;
+}
+
+
+function getCourseData() {
+    let x = localStorage.getItem('courseData');
+    if (x === null)
+        return [];
+    else
+        return JSON.parse(x);
+}
+
+function setCourseData() {
+    localStorage.setItem('courseData', JSON.stringify(data));
+}
+ 
+function deleteCourseData() {
+    localStorage.removeItem('courseData');
+    alert('Course data deleted.');
 }
 

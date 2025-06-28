@@ -1,0 +1,36 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Tutor Feedback</title>
+    <link href="StyleSheet1.css" rel="stylesheet" />
+    <script>
+        const radioNames = ['punctuality', 'camera', 'engagement', 'work_ethic','mic'];
+        const states = ['Positive', 'Neutral', 'Negative', 'N/A'];
+    </script>
+    <script src="JavaScript1.js" defer></script>
+</head>
+<body>
+    <div>
+        <h1>Tutor feedback generator</h1>
+        <span class="feedback-area">Learner name:</span>
+        <input type="text" id="learner" name="learner" />
+        <hr />
+        <div id="options"></div>
+        <hr />
+
+        <textarea id="comments" placeholder="Additional comments + recommendations for further learning:
+💡 Tip: if you type <name>, the learner's name will be inserted."></textarea>
+        <button onclick="savedClick()">Save student record</button>
+        <hr />
+        <div>
+            <label for="course_title">Course title:</label>
+            <input type="text" id="course_title" />
+            <label for="course_date">Start date:</label>
+            <input type="date" id="start_date" />
+            <button onclick="generateReports()">Generate reports for all students</button>
+        </div>
+    </div>
+</body>
+</html>

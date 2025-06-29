@@ -19,15 +19,7 @@ function savedClick() {
     setCourseData();
     restForm();
 }
-
-function generateReports() {
-    let report = "Generate a report using the criteria below for each student." +
-        "Insert te following at the begining of each student tutor report:\n" +
-        "w/c " + getValue("start_date") + " - " +
-        getValue("course_title") + "\n";
-    console.log(report + JSON.stringify(data));
-}
-
+//-------------------------------------------------------
 function restForm() {
     setValue('learner', '').focus();
     setValue('comments', '');
@@ -37,7 +29,7 @@ function restForm() {
     });
 }
 
-// set up the select option tags
+// set up the select option tags --------------------------
 function setupOptions() {
     let options = document.getElementById("options");
     for (let i = 0; i < radioNames.length; i++) {
@@ -47,13 +39,25 @@ function setupOptions() {
             makeTag("hr", "", options, "nullClass");
         }
     }
-
     const selects = document.getElementsByTagName("select");
     for (const select of selects) {
         for (const state of states) {
             makeTag("option", state, select, "nullClass");
         }
     }
+
+    setValue("start_date", new Date().toISOString().split('T')[0]);
+}
+//-------------------------------------------------------------------
+function generateReports() {
+    let report = `Generate a report using the criteria below for each student.
+Insert the following at the begining of each student tutor report:
+w/c ${getValue("start_date")} - ${getValue("course_title")} 
+${JSON.stringify(data)}`;
+
+    navigator.clipboard.writeText(report)
+        .then(() => alert("Copied to clipboard!"))
+        .catch(err => alert("Failed to copy: " + err));
 }
 
 //-------------------------------- Utils ---------------
@@ -86,7 +90,7 @@ function getCourseData() {
 function setCourseData() {
     localStorage.setItem('courseData', JSON.stringify(data));
 }
- 
+
 function deleteCourseData() {
     localStorage.removeItem('courseData');
     alert('Course data deleted.');

@@ -34,18 +34,14 @@ function setupOptions() {
     let options = document.getElementById("options");
     for (let i = 0; i < radioNames.length; i++) {
         makeTag("span", radioNames[i], options, "feedback-area");
-        makeTag("select", "", options, "nullClass").id = radioNames[i];
-        if ((i + 1) % 3 === 0) {
-            makeTag("hr", "", options, "nullClass");
-        }
-    }
-    const selects = document.getElementsByTagName("select");
-    for (const select of selects) {
+        let select = makeTag("select", "", options)
+        select.id = radioNames[i];
         for (const state of states) {
-            makeTag("option", state, select, "nullClass");
+            makeTag("option", state, select);
         }
+        if ( (i+1) % 3 === 0)
+            makeTag("hr", "", options);
     }
-
     setValue("start_date", new Date().toISOString().split('T')[0]);
 }
 //-------------------------------------------------------------------
@@ -70,14 +66,13 @@ function setValue(optionID, txt) {
     x.value = txt;
     return x;
 }
-function makeTag(tagName, tagText, tagContainer, tagClass) {
+function makeTag(tagName, tagText, tagContainer, tagClass="roundEdge") {
     let newTag = document.createElement(tagName);
     newTag.innerText = tagText;
     newTag.classList.add(tagClass);
     tagContainer.appendChild(newTag);
     return newTag;
 }
-
 
 function getCourseData() {
     let x = localStorage.getItem('courseData');

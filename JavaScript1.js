@@ -46,8 +46,8 @@ function setupOptions() {
 }
 //-------------------------------------------------------------------
 function generateReports() {
-    let report = `Generate a report using the criteria below for each student.
-Insert the following at the begining of each student tutor report:
+    let report = `Generate an end of course detailed but short report using the criteria below for each student.
+Insert the following at the beginning of each student tutor report:
 w/c ${getValue("start_date")} - ${getValue("course_title")} 
 ${JSON.stringify(data)}`;
 

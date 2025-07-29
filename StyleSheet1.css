@@ -55,3 +55,14 @@ h1 {
     width:50%;
 }
 
+#options select{
+    margin-right:1em;
+}
+
+#options span{
+    display:inline-block;
+    width:7em;
+    text-align: right;
+    margin-right: 5px;
+}
+

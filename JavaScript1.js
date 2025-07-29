@@ -14,21 +14,21 @@ function showRegisteredStudents() {
     }
 }
 
-function isRegistered(newStuName){
+function isRegistered(newStuName) {
     let data = getCourseData();
     for (let stu of data) {
-        if(stu.name.toLowerCase() == newStuName.toLowerCase()) return true;
+        if (stu.name.toLowerCase() == newStuName.toLowerCase()) return true;
     }
     return false;
 }
 
 function savedClick() {
     const learnerName = getValue('learner').trim();
-    if(learnerName.length==0){
+    if (learnerName.length == 0) {
         alert("Please enter the student's name")
         return;
     }
-    if(isRegistered(learnerName)){
+    if (isRegistered(learnerName)) {
         alert("Student name already registered!")
         return;
     }
@@ -66,12 +66,11 @@ function setupOptions() {
     states = document.getElementById("states").value.split(",");
 
     for (let i = 0; i < radioNames.length; i++) {
-        makeTag("span", radioNames[i], options, "feedback-area");
+        let selectLabel = makeTag("span", radioNames[i] + ": ", options);
         let select = makeTag("select", "", options)
+        let optionString = states.map(opt => `<option>${opt}</option>`).join('');
+        select.innerHTML = optionString;
         select.id = radioNames[i];
-        for (const state of states) {
-            makeTag("option", state, select);
-        }
         if ((i + 1) % 3 === 0)
             makeTag("hr", "", options);
     }
@@ -119,8 +118,9 @@ function setCourseData() {
 }
 
 function deleteCourseData() {
-    localStorage.removeItem('courseData');
-    alert('Course data deleted.');
-    showRegisteredStudents();
+    if (confirm('Delete all Course data?')) {
+        localStorage.removeItem('courseData');
+        showRegisteredStudents();
+    }
 }
 

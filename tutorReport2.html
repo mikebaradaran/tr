@@ -6,8 +6,8 @@
     <title>Tutor Feedback</title>
     <link href="StyleSheet1.css" rel="stylesheet" />
     <script>
-        const radioNames = ['punctuality', 'camera', 'engagement', 'work_ethic','mic'];
-        const states = ['Positive', 'Neutral', 'Negative', 'N/A'];
+        // const radioNames = ['punctuality', 'camera', 'engagement', 'work_ethic','mic'];
+        // const states = ['Positive', 'Neutral', 'Negative', 'N/A'];
     </script>
     <script src="JavaScript1.js" defer></script>
 </head>
@@ -16,6 +16,7 @@
         <h1>Tutor feedback generator</h1>
         <label for="learner" class="feedback-area">Learner name:</label>
         <input type="text" id="learner" name="learner" class="roundEdge" />
+        <select id="registeredStudents"></select>
         <hr />
         <div id="options"></div>
         <hr />
@@ -31,6 +32,13 @@
             <input type="date" id="start_date" class="roundEdge" />
             <button onclick="generateReports()"> 📜Generate reports for all students</button><hr />
             <button onclick="deleteCourseData()">❌ Delete last class data and start a new class</button>
+        </div>
+        <hr />
+        <div>
+            radioNames: <input type="text" id="radioNames" value="punctuality,camera,engagement,work ethic,mic" />
+            <hr />
+            states: <input type="text" id="states" value="Positive,Neutral,Negative,N/A" />
+            <button onclick="setupOptions()">Reset form</button>
         </div>
     </div>
 </body>

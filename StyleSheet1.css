@@ -50,3 +50,8 @@ h1 {
     border-radius: 5px;
 }
 
+#radioNames,#states{
+    margin-left:6em;
+    width:50%;
+}
+

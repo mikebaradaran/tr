@@ -28,10 +28,10 @@ textarea {
 
 button {
     display: inline-block;
-    border-radius: 10px;
+    border-radius: 5px;
     padding: 0.3em;
     font-weight: bold;
-    font-size: 14px;
+    font-size: 12px;
 }
 
 h1 {
@@ -50,19 +50,38 @@ h1 {
     border-radius: 5px;
 }
 
-#radioNames,#states{
-    margin-left:6em;
-    width:50%;
+#radioNames,
+#states {
+    margin-left: 6em;
+    width: 50%;
 }
 
-#options select{
-    margin-right:1em;
+#options select {
+    margin-right: 1em;
 }
 
-#options span{
-    display:inline-block;
-    width:7em;
+#options span {
+    display: inline-block;
+    width: 7em;
     text-align: right;
     margin-right: 5px;
 }
 
+#adminPart, #reportPart {
+    background-color: rgb(87, 1, 1);
+    padding: 10px;
+    border-radius: 15px;
+    margin-top: 10px;
+    margin-bottom: 10px;
+    box-shadow: 3px 2px 3px grey;
+}
+
+.input-group span {
+    display: inline-block;
+    width: 1em;
+    margin-top: 10px;
+}
+
+.input-group input {
+    display: inline-block;
+}

@@ -120,6 +120,7 @@ function setCourseData() {
 function deleteCourseData() {
     if (confirm('Delete all Course data?')) {
         localStorage.removeItem('courseData');
+        data=[];
         showRegisteredStudents();
     }
 }
